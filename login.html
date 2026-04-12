@@ -1,130 +1,24 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Header Login</title>
+
+<title>Login / Register</title>
+<link rel="stylesheet" href="login.css">
 
 <style>
-* {
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-body {
-  margin: 0;
-  background: #f1f5f9;
-}
-
-/* ===== HEADER ===== */
-header {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  padding: 15px 20px;
-}
-
-.header-container {
-  max-width: 1200px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.logo {
-  color: #fff;
-  font-size: 22px;
-  font-weight: bold;
-}
-
-/* ===== AUTH BOX ===== */
-.auth-box {
-  background: #fff;
-  width: 100%;
-  max-width: 350px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-.auth-box h2 {
-  text-align: center;
-  margin-bottom: 15px;
-  font-size: 18px;
-}
-
-.auth-box input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.btn-group {
-  display: flex;
-  gap: 8px;
-}
-
-.auth-box button {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.primary-btn {
-  background: #667eea;
-  color: white;
-}
-
-.secondary-btn {
-  background: #e2e8f0;
-}
-
-.auth-footer {
-  text-align: center;
-  font-size: 13px;
-  margin-top: 8px;
-}
-
-.auth-footer a {
-  color: #667eea;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.error {
-  text-align: center;
-  font-size: 12px;
-  color: red;
-  margin-bottom: 5px;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .auth-box {
-    max-width: 100%;
-  }
+.hidden {
+  display: none;
 }
 </style>
+
 </head>
 
 <body>
 
 <header>
   <div class="header-container">
- 
 
     <div class="auth-box">
       <h2 id="formTitle">User Login</h2>
@@ -132,7 +26,7 @@ header {
       <div class="error" id="errorMsg"></div>
 
       <input type="email" id="email" placeholder="Email">
-      <input type="tel" id="phone" placeholder="Phone Number">
+      <input type="tel" id="phone" placeholder="Phone Number" class="hidden">
       <input type="password" id="password" placeholder="Password">
 
       <div class="btn-group">
@@ -145,6 +39,7 @@ header {
         <a id="toggleLink">Register</a>
       </div>
     </div>
+
   </div>
 </header>
 
@@ -162,6 +57,7 @@ const phone = document.getElementById("phone");
 const password = document.getElementById("password");
 const resetBtn = document.getElementById("resetBtn");
 
+// Toggle Login/Register
 toggleLink.addEventListener("click", () => {
   isLogin = !isLogin;
 
@@ -169,13 +65,16 @@ toggleLink.addEventListener("click", () => {
   mainBtn.innerText = isLogin ? "Login" : "Register";
   toggleText.innerText = isLogin ? "Don’t have an account?" : "Already have an account?";
   toggleLink.innerText = isLogin ? "Register" : "Login";
+
+  phone.classList.toggle("hidden", isLogin);
   errorMsg.innerText = "";
 });
 
-mainBtn.addEventListener("click", () => {
+// Submit
+mainBtn.addEventListener("click", async () => {
   errorMsg.innerText = "";
 
-  if (!email.value || !phone.value || !password.value) {
+  if (!email.value || !password.value || (!isLogin && !phone.value)) {
     errorMsg.innerText = "⚠ Please fill all fields";
     return;
   }
@@ -185,11 +84,51 @@ mainBtn.addEventListener("click", () => {
     return;
   }
 
-  alert(isLogin ? "✅ Login Successful" : "🎉 Registration Successful");
+  mainBtn.innerText = "Processing...";
+  mainBtn.disabled = true;
+
+  try {
+    const response = await fetch(isLogin ? "login.php" : "register.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: email.value,
+        phone: phone.value,
+        password: password.value
+      })
+    });
+
+    const data = await response.text();
+
+    if (data === "success") {
+      alert(isLogin ? "Login Successful" : "Registration Successful");
+
+      // redirect after login
+      if (isLogin) {
+        window.location.href = "dashboard.php";
+      } else {
+        toggleLink.click(); // switch to login
+      }
+
+    } else {
+      errorMsg.innerText = data;
+    }
+
+  } catch (error) {
+    errorMsg.innerText = "Server error. Try again.";
+  }
+
+  mainBtn.innerText = isLogin ? "Login" : "Register";
+  mainBtn.disabled = false;
 });
 
+// Reset
 resetBtn.addEventListener("click", () => {
-  email.value = phone.value = password.value = "";
+  email.value = "";
+  phone.value = "";
+  password.value = "";
   errorMsg.innerText = "";
 });
 </script>

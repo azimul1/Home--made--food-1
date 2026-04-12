@@ -4,461 +4,101 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Professional Admin Panel</title>
+<title>Professional Admin Panel - SPA</title>
+<link rel="stylesheet" href="Admin.css">
 
-<style>
-  /* ================= GLOBAL VARIABLES & RESET ================= */
-  :root {
-    --primary: #2563eb;
-    --primary-dark: #1d4ed8;
-    --secondary: #64748b;
-    --bg-body: #f1f5f9;
-    --bg-sidebar: #ffffff;
-    --text-main: #334155;
-    --text-muted: #94a3b8;
-    --border: #e2e8f0;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --sidebar-width: 260px;
-  }
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-  }
-
-  body {
-    background: var(--bg-body);
-    color: var(--text-main);
-    overflow-x: hidden;
-  }
-
-  /* ================= LAYOUT STRUCTURE ================= */
-  .app-wrapper {
-    display: flex;
-    min-height: 100vh;
-  }
-
-  /* ================= SIDEBAR ================= */
-  .sidebar {
-    width: var(--sidebar-width);
-    background: var(--bg-sidebar);
-    height: 100vh;
-    position: fixed; /* Fixed on desktop */
-    top: 0;
-    left: 0;
-    padding: 20px 15px;
-    border-right: 1px solid var(--border);
-    transition: transform 0.3s ease;
-    z-index: 1000;
-    overflow-y: auto;
-  }
-
-  /* Logo */
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 30px;
-    padding: 0 10px;
-  }
-
-  .logo img {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-  }
-
-  .logo span {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--primary);
-    letter-spacing: -0.5px;
-  }
-
-  /* Sidebar Section Titles */
-  .section {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin: 20px 0 10px 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-  }
-
-  /* Sidebar Menu */
-  .menu {
-    list-style: none;
-  }
-
-  .menu li {
-    margin-bottom: 4px;
-  }
-
-  .menu a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
-    text-decoration: none;
-    color: var(--secondary);
-    border-radius: 8px;
-    font-size: 14px;
-    transition: all 0.2s;
-  }
-
-  .menu a:hover {
-    background: #f8fafc;
-    color: var(--primary);
-  }
-
-  .menu a.active {
-    background: #eff6ff;
-    color: var(--primary);
-    font-weight: 600;
-  }
-
-  .menu .icon {
-    font-size: 18px;
-    width: 20px;
-    text-align: center;
-  }
-
-  /* Submenu */
-  .submenu {
-    padding-left: 44px;
-    display: none;
-    margin-top: 4px;
-  }
-  .submenu a {
-    font-size: 13px;
-  }
-  .menu li.open .submenu {
-    display: block;
-  }
-
-  /* ================= MAIN CONTENT ================= */
-  .main-content {
-    margin-left: var(--sidebar-width); /* Space for sidebar */
-    width: calc(100% - var(--sidebar-width));
-    padding: 30px;
-    transition: margin-left 0.3s ease, width 0.3s ease;
-  }
-
-  .header-mobile {
-    display: none;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-
-  .page-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 25px;
-  }
-
-  /* ================= CARDS & WIDGETS ================= */
-  .card {
-    background: #fff;
-    padding: 24px;
-    border-radius: 12px;
-    margin-bottom: 24px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    scroll-margin-top: 20px; /* For smooth scroll offset */
-  }
-
-  .card h2 {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: #1e293b;
-    border-bottom: 1px solid #f1f5f9;
-    padding-bottom: 12px;
-  }
-
-  /* Stats Grid */
-  .dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-  }
-
-  .stat-card {
-    background: linear-gradient(135deg, var(--primary), #60a5fa);
-    color: #fff;
-    padding: 24px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
-  }
-  
-  .stat-card h3 {
-    font-size: 14px;
-    opacity: 0.9;
-    font-weight: 500;
-    margin-bottom: 8px;
-  }
-
-  .stat-card .number {
-    font-size: 32px;
-    font-weight: 700;
-  }
-
-  /* Buttons & Inputs */
-  button {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: background 0.2s;
-  }
-
-  button:hover {
-    background: var(--primary-dark);
-  }
-  
-  button.delete-btn {
-    background: #ef4444;
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-  
-  button.delete-btn:hover {
-    background: #dc2626;
-  }
-
-  .form-group {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
-  }
-
-  input, select {
-    padding: 10px 14px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    font-size: 14px;
-    outline: none;
-    flex: 1;
-    min-width: 200px;
-  }
-  
-  input:focus, select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-  }
-
-  /* Tables */
-  .table-container {
-    overflow-x: auto;
-  }
-
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 500px;
-  }
-
-  .table th, .table td {
-    padding: 14px 16px;
-    text-align: left;
-    border-bottom: 1px solid #f1f5f9;
-  }
-
-  .table th {
-    background: #f8fafc;
-    color: #64748b;
-    font-weight: 600;
-    font-size: 13px;
-    text-transform: uppercase;
-  }
-
-  .table tr:last-child td {
-    border-bottom: none;
-  }
-
-  /* List Styles (for Menu/Orders) */
-  .item-list {
-    list-style: none;
-    margin-top: 10px;
-  }
-  
-  .item-list li {
-    background: #f8fafc;
-    border: 1px solid #f1f5f9;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  /* Toast Notifications */
-  #toast-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 2000;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .toast {
-    background: #fff;
-    padding: 16px 20px;
-    border-radius: 8px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    border-left: 4px solid var(--primary);
-    display: flex;
-    align-items: center;
-    animation: slideIn 0.3s ease-out;
-    min-width: 250px;
-  }
-
-  .toast.error { border-left-color: #ef4444; }
-  .toast.success { border-left-color: #10b981; }
-
-  @keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-
-  /* Mobile Toggle Button */
-  .toggle-btn {
-    display: none;
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    z-index: 1100;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  }
-
-  /* ================= RESPONSIVE DESIGN ================= */
-  @media (max-width: 992px) {
-    .sidebar {
-      transform: translateX(-100%); /* Hide off-screen */
-    }
-    
-    .sidebar.show {
-      transform: translateX(0); /* Slide in */
-    }
-
-    .main-content {
-      margin-left: 0;
-      width: 100%;
-      padding: 20px;
-      padding-top: 60px; /* Space for toggle button */
-    }
-
-    .toggle-btn {
-      display: block;
-    }
-
-    .header-mobile {
-      display: flex; /* Show mobile header if needed */
-    }
-  }
-</style>
 </head>
 <body>
 
   <!-- Toast Container -->
   <div id="toast-container"></div>
 
-  <!-- Mobile Toggle -->
-  <button class="toggle-btn" onclick="toggleSidebar()">☰ Menu</button>
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/906/906334.png" alt="logo">
+      <span>AdminPanel</span>
+    </div>
 
-  <div class="app-wrapper">
+    <nav>
+      <!-- MAIN -->
+      <div class="nav-section">
+        <div class="nav-title">Main</div>
+        <ul class="menu">
+          <li><a onclick="navigate('dashboard')" class="menu-link active" id="nav-dashboard"><span class="icon">🏠</span> Dashboard</a></li>
+          <li><a onclick="navigate('users')" class="menu-link" id="nav-users"><span class="icon">✉️</span> User Management</a></li>
+          <li><a onclick="navigate('menu')" class="menu-link" id="nav-menu"><span class="icon">✅</span> Menu Management</a></li>
+          <li><a onclick="navigate('orders')" class="menu-link" id="nav-orders"><span class="icon">👤</span> User Orders</a></li>
+          <li><a onclick="navigate('financial')" class="menu-link" id="nav-financial"><span class="icon">📅</span> Financial</a></li>
+          <li><a onclick="navigate('reports')" class="menu-link" id="nav-reports"><span class="icon">💬</span> Reports & Analysis</a></li>
+          <li><a onclick="navigate('security')" class="menu-link" id="nav-security"><span class="icon">🔒</span> Security & Access</a></li>
+          <li><a onclick="navigate('notifications')" class="menu-link" id="nav-notifications"><span class="icon">🔔</span> Notifications</a></li>
+        </ul>
+      </div>
+
+      <!-- SYSTEM -->
+      <div class="nav-section">
+        <div class="nav-title">System</div>
+        <ul class="menu">
+          <li><a onclick="navigate('settings')" class="menu-link" id="nav-settings"><span class="icon">⚙️</span> Settings</a></li>
+          <li><a onclick="handleLogout()" class="menu-link" id="nav-logout"><span class="icon">🚪</span> Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="main-content" id="mainContent">
     
-    <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar">
-      <div class="logo">
-        <!-- Generic Admin Icon -->
-        <img src="https://cdn-icons-png.flaticon.com/512/906/906334.png" alt="logo">
-        <span>AdminPanel</span>
+    <!-- Mobile Header -->
+    <div class="header-mobile">
+      <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+      <h2 id="mobile-title">Dashboard</h2>
+    </div>
+
+    <!-- 1. DASHBOARD SECTION -->
+    <section id="dashboard" class="section-view active-view">
+      <div class="page-header">
+        <h1 class="page-title">Dashboard Overview</h1>
+        <p class="page-desc">Welcome back, Administrator. Here is what's happening today.</p>
       </div>
 
-      <!-- Navigation -->
-      <nav>
-        <div class="section">Main</div>
-        <ul class="menu">
-          <li class="open">
-            <a href="#" class="active" onclick="toggleMenu(event)">
-              <span class="icon">🏠</span> Dashboard
-            </a>
-            <div class="submenu">
-              <a href="#dashboard">Overview</a>
-            </div>
-          </li>
-
-          <!-- Added IDs for smooth scrolling to sections -->
-          <li><a href="#user-mgmt"><span class="icon">✉️</span> User Management</a></li>
-          <li><a href="#menu-mgmt"><span class="icon">✅</span> Menu Management</a></li>
-          <li><a href="#order-mgmt"><span class="icon">👤</span> User Orders</a></li>
-          <li><a href="#financial-mgmt"><span class="icon">📅</span> Financial</a></li>
-          <li><a href="#reports"><span class="icon">💬</span> Reports & Analysis</a></li>
-          <li><a href="#security"><span class="icon">🔒</span> Security & Access</a></li>
-          <li><a href="#notifications"><span class="icon">🔔</span> Notifications</a></li>
-        </ul>
-
-        <div class="section">System</div>
-        <ul class="menu">
-          <li><a href="#"><span class="icon">⚙️</span> Settings</a></li>
-          <li><a href="#"><span class="icon">🚪</span> Logout</a></li>
-        </ul>
-      </nav>
-    </aside>
-
-    <!-- MAIN CONTENT AREA -->
-    <main class="main-content" id="mainContent">
-      
-      <!-- Header / Title -->
-      <div class="header-mobile">
-        <h1>Dashboard</h1>
-      </div>
-      <div class="page-title">Overview</div>
-
-      <!-- DASHBOARD STATS -->
-      <section id="dashboard" class="card">
-        <div class="dashboard-grid">
-          <div class="stat-card">
-            <h3>Total Users</h3>
-            <div class="number" id="userCount">0</div>
-          </div>
-          <div class="stat-card">
-            <h3>Total Orders</h3>
-            <div class="number" id="orderCount">0</div>
-          </div>
-          <div class="stat-card">
-            <h3>Total Revenue</h3>
-            <div class="number">৳<span id="revenue">0</span></div>
-          </div>
-          <div class="stat-card" style="background: linear-gradient(135deg, #64748b, #94a3b8);">
-            <h3>Active Admins</h3>
-            <div class="number">1</div>
-          </div>
+      <div class="dashboard-grid">
+        <div class="stat-card">
+          <h3>Total Users</h3>
+          <div class="number" id="dash-userCount">0</div>
         </div>
-      </section>
+        <div class="stat-card">
+          <h3>Total Orders</h3>
+          <div class="number" id="dash-orderCount">0</div>
+        </div>
+        <div class="stat-card">
+          <h3>Total Revenue</h3>
+          <div class="number">৳<span id="dash-revenue">0</span></div>
+        </div>
+        <div class="stat-card" style="border-bottom-color: #64748b;">
+          <h3>Active Admins</h3>
+          <div class="number">1</div>
+        </div>
+      </div>
+      
+      <div class="card" style="margin-top: 20px;">
+        <h3>Quick Actions</h3>
+        <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
+            <button onclick="navigate('orders')">+ New Order</button>
+            <button style="background-color: var(--success);" onclick="navigate('users')">+ Add User</button>
+            <button style="background-color: #f59e0b;" onclick="navigate('financial')">View Finances</button>
+        </div>
+      </div>
+    </section>
 
-      <!-- USER MANAGEMENT -->
-      <section id="user-mgmt" class="card">
-        <h2>User Management</h2>
+    <!-- 2. USER MANAGEMENT SECTION -->
+    <section id="users" class="section-view">
+      <div class="page-header">
+        <h1 class="page-title">User Management</h1>
+        <p class="page-desc">Manage system users and roles.</p>
+      </div>
+      <div class="card">
         <div class="form-group">
           <input id="userName" type="text" placeholder="Enter User Name">
           <select id="userRole">
@@ -468,99 +108,170 @@
           </select>
           <button onclick="addUser()">Add User</button>
         </div>
-
-        <div class="table-container">
-          <table class="table">
+        <div style="overflow-x:auto;">
+            <table class="table">
             <thead>
-              <tr>
+                <tr>
                 <th>Name</th>
                 <th>Role</th>
                 <th>Action</th>
-              </tr>
+                </tr>
             </thead>
             <tbody id="userTable"></tbody>
-          </table>
+            </table>
         </div>
-      </section>
-
-      <!-- MENU MANAGEMENT -->
-      <section id="menu-mgmt" class="card">
-        <h2>Menu Management</h2>
+      </div>
+    </section>
+    
+    <!-- 3. MENU MANAGEMENT SECTION -->
+    <section id="menu" class="section-view">
+      <div class="page-header">
+        <h1 class="page-title">Menu Management</h1>
+        <p class="page-desc">Control restaurant menu items.</p>
+      </div>
+      <div class="card">
         <div class="form-group">
-          <input id="menuItem" type="text" placeholder="New Menu Item Name">
+          <input id="menuItem" type="text" placeholder="New Menu Item Name (e.g., Burger)">
           <button onclick="addMenu()">Add Item</button>
         </div>
-        <ul id="menuList" class="item-list"></ul>
-      </section>
+        <ul id="menuList" class="item-list">
+            <!-- Default Item -->
+            <li><span>Grilled Chicken</span> <span style="color:#10b981; font-size:12px; font-weight:bold;">Active</span></li>
+        </ul>
+      </div>
+    </section>
 
-      <!-- ORDER MANAGEMENT -->
-      <section id="order-mgmt" class="card">
-        <h2>Order Management</h2>
+    <!-- 4. ORDER MANAGEMENT SECTION -->
+    <section id="orders" class="section-view">
+      <div class="page-header">
+        <h1 class="page-title">Order Management</h1>
+        <p class="page-desc">Track and manage incoming orders.</p>
+      </div>
+      <div class="card">
         <button onclick="addOrder()" style="width: 100%; margin-bottom: 15px;">Create New Order</button>
         <ul id="orderList" class="item-list"></ul>
-      </section>
+      </div>
+    </section>
 
-      <!-- FINANCIAL -->
-      <section id="financial-mgmt" class="card">
-        <h2>Financial Management</h2>
+    <!-- 5. FINANCIAL SECTION -->
+    <section id="financial" class="section-view">
+      <div class="page-header">
+        <h1 class="page-title">Financial Management</h1>
+        <p class="page-desc">Monitor revenue and transaction flow.</p>
+      </div>
+      <div class="card">
         <p style="margin-bottom: 15px; color: #64748b;">Simulate revenue intake per transaction.</p>
         <div class="form-group">
             <button onclick="addRevenue()">+ Add ৳500 Revenue</button>
         </div>
-        <div style="background: #f8fafc; padding: 15px; border-radius: 8px; font-weight: 600; font-size: 18px;">
-            Total Balance: ৳<span id="financeTotal">0</span>
+        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center;">
+            <span style="color:#64748b; font-size:0.9rem;">Total Balance</span>
+            <div style="font-weight: 700; font-size: 2.5rem; color: #1e293b;">৳<span id="financeTotal">0</span></div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- REPORTS -->
-      <section id="reports" class="card">
-        <h2>Reports & Analytics</h2>
-        <div style="display: grid; gap: 10px;">
-          <div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: #f0f9ff; border-radius: 6px; color: #0369a1;">
-            <span>📈</span> Daily Orders increased by 12%
-          </div>
-          <div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: #f0fdf4; border-radius: 6px; color: #15803d;">
-            <span>💰</span> Monthly Revenue target reached
-          </div>
-          <div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: #fff7ed; border-radius: 6px; color: #c2410c;">
-            <span>👥</span> User Growth steady
+    <!-- 6. REPORTS SECTION -->
+    <section id="reports" class="section-view">
+      <div class="page-header">
+        <h1 class="page-title">Reports & Analytics</h1>
+        <p class="page-desc">Business intelligence overview.</p>
+      </div>
+      <div style="display: grid; gap: 15px;">
+        <div class="card" style="display: flex; align-items: center; gap: 15px; padding: 20px; border-left: 5px solid #0ea5e9;">
+          <span style="font-size: 2rem;">📈</span>
+          <div>
+            <h4>Daily Orders</h4>
+            <p style="color: #64748b; font-size: 0.9rem;">Increased by 12% compared to yesterday.</p>
           </div>
         </div>
-      </section>
+        <div class="card" style="display: flex; align-items: center; gap: 15px; padding: 20px; border-left: 5px solid #10b981;">
+          <span style="font-size: 2rem;">💰</span>
+          <div>
+            <h4>Monthly Revenue</h4>
+            <p style="color: #64748b; font-size: 0.9rem;">Target reached 5 days ahead of schedule.</p>
+          </div>
+        </div>
+        <div class="card" style="display: flex; align-items: center; gap: 15px; padding: 20px; border-left: 5px solid #f97316;">
+          <span style="font-size: 2rem;">👥</span>
+          <div>
+            <h4>User Growth</h4>
+            <p style="color: #64748b; font-size: 0.9rem;">Steady stream of new registrations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <!-- SECURITY -->
-      <section id="security" class="card">
-        <h2>Security & Access</h2>
-        <div class="table-container">
-          <table class="table">
+    <!-- 7. SECURITY SECTION -->
+    <section id="security" class="section-view">
+      <div class="page-header">
+        <h1 class="page-title">Security & Access</h1>
+        <p class="page-desc">System safety status and logs.</p>
+      </div>
+      <div class="card">
+        <div style="overflow-x:auto;">
+            <table class="table">
             <tr>
-              <td><strong>Current Role</strong></td>
-              <td>Super Admin</td>
+                <td style="width: 40%;"><strong>Current Role</strong></td>
+                <td>Super Admin</td>
             </tr>
             <tr>
-              <td><strong>Access Level</strong></td>
-              <td>Full Access</td>
+                <td><strong>Access Level</strong></td>
+                <td>Full Access (Level 5)</td>
             </tr>
             <tr>
-              <td><strong>2FA Status</strong></td>
-              <td style="color: #10b981;">✔ Enabled</td>
+                <td><strong>Last Login IP</strong></td>
+                <td>192.168.1.102</td>
             </tr>
-          </table>
+            <tr>
+                <td><strong>2FA Status</strong></td>
+                <td style="color: #10b981; font-weight: bold;">✔ Enabled</td>
+            </tr>
+            </table>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- NOTIFICATIONS -->
-      <section id="notifications" class="card">
-        <h2>System Notifications</h2>
+    <!-- 8. NOTIFICATIONS SECTION -->
+    <section id="notifications" class="section-view">
+      <div class="page-header">
+        <h1 class="page-title">System Notifications</h1>
+        <p class="page-desc">Send broadcasts to users.</p>
+      </div>
+      <div class="card">
         <div class="form-group">
           <input id="notifyText" type="text" placeholder="Type notification message...">
           <button onclick="sendNotification()">Send Notification</button>
         </div>
         <ul id="notifyList" class="item-list"></ul>
-      </section>
+      </div>
+    </section>
 
-    </main>
-  </div>
+    <!-- 9. SETTINGS SECTION -->
+    <section id="settings" class="section-view">
+      <div class="page-header">
+        <h1 class="page-title">Settings</h1>
+        <p class="page-desc">Application configuration.</p>
+      </div>
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding: 10px 0; border-bottom: 1px solid #eee;">
+            <div>
+                <strong>Dark Mode</strong>
+                <p style="font-size:0.85rem; color:#64748b;">Toggle application theme</p>
+            </div>
+            <button style="background:#cbd5e1; color:#333;">Switch</button>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding: 10px 0; border-bottom: 1px solid #eee;">
+            <div>
+                <strong>Email Alerts</strong>
+                <p style="font-size:0.85rem; color:#64748b;">Receive daily summaries</p>
+            </div>
+            <button onclick="showToast('Settings Saved')">Enable</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
 
 <script>
   // ================= STATE MANAGEMENT =================
@@ -570,16 +281,48 @@
     revenue: 0
   };
 
-  // ================= SIDEBAR LOGIC =================
+  // ================= NAVIGATION LOGIC (SPA) =================
+  function navigate(sectionId) {
+    // 1. Hide all sections
+    document.querySelectorAll('.section-view').forEach(sec => {
+      sec.classList.remove('active-view');
+    });
+
+    // 2. Show target section
+    const target = document.getElementById(sectionId);
+    if(target) {
+        target.classList.add('active-view');
+    }
+
+    // 3. Update Sidebar Active State
+    document.querySelectorAll('.menu-link').forEach(link => {
+      link.classList.remove('active');
+    });
+    const activeLink = document.getElementById('nav-' + sectionId);
+    if(activeLink) activeLink.classList.add('active');
+
+    // 4. Update Mobile Title
+    const mobileTitle = document.getElementById('mobile-title');
+    if(activeLink) mobileTitle.innerText = activeLink.innerText.trim();
+
+    // 5. Close sidebar on mobile after selection
+    if(window.innerWidth <= 768) {
+        document.getElementById('sidebar').classList.remove('show');
+    }
+  }
+
   function toggleSidebar() {
     document.getElementById("sidebar").classList.toggle("show");
   }
 
-  function toggleMenu(e) {
-    e.preventDefault();
-    // Toggle the 'open' class on the parent list item
-    const parentLi = e.target.closest("li");
-    parentLi.classList.toggle("open");
+  function handleLogout() {
+    if(confirm("Are you sure you want to logout?")) {
+        showToast("Logging out...", "error");
+        setTimeout(() => {
+            // Reset app for demo purposes
+            location.reload();
+        }, 1500);
+    }
   }
 
   // ================= TOAST NOTIFICATION SYSTEM =================
@@ -591,16 +334,16 @@
     
     container.appendChild(toast);
 
-    // Remove after 3 seconds
     setTimeout(() => {
       toast.style.opacity = "0";
+      toast.style.transform = "translateY(20px)";
       setTimeout(() => toast.remove(), 300);
     }, 3000);
   }
 
-  // ================= DASHBOARD INTERACTIONS =================
+  // ================= FEATURE LOGIC =================
 
-  /* USER MANAGEMENT */
+  /* --- USER MANAGEMENT --- */
   function addUser() {
     const nameInput = document.getElementById("userName");
     const roleInput = document.getElementById("userRole");
@@ -615,17 +358,17 @@
     
     row.innerHTML = `
       <td>${nameInput.value}</td>
-      <td><span style="padding: 2px 8px; background: #e0e7ff; color: #3730a3; border-radius: 10px; font-size: 12px;">${roleInput.value}</span></td>
+      <td><span style="padding: 4px 10px; background: #e0e7ff; color: #3730a3; border-radius: 12px; font-size: 0.85rem; font-weight:600;">${roleInput.value}</span></td>
       <td><button class="delete-btn" onclick="removeUser(this)">Delete</button></td>
     `;
     
     tableBody.appendChild(row);
     
-    // Update Stats
+    // Update Global Stats & Dashboard
     stats.users++;
-    document.getElementById("userCount").innerText = stats.users;
+    updateDashboardStats();
     
-    showToast(`User ${nameInput.value} added successfully!`);
+    showToast(`User ${nameInput.value} added!`);
     nameInput.value = "";
   }
 
@@ -633,11 +376,11 @@
     const row = btn.closest("tr");
     row.remove();
     stats.users--;
-    document.getElementById("userCount").innerText = stats.users;
+    updateDashboardStats();
     showToast("User removed", "error");
   }
 
-  /* MENU MANAGEMENT */
+  /* --- MENU MANAGEMENT --- */
   function addMenu() {
     const input = document.getElementById("menuItem");
     if (!input.value.trim()) {
@@ -647,48 +390,76 @@
 
     const list = document.getElementById("menuList");
     const li = document.createElement("li");
-    li.innerHTML = `<span>${input.value}</span> <span style="color:#10b981">Active</span>`;
+    li.innerHTML = `
+        <div style="display:flex; align-items:center; gap:10px;">
+            <span style="width:10px; height:10px; background:#10b981; border-radius:50%;"></span>
+            <span>${input.value}</span>
+        </div>
+        <button class="delete-btn" onclick="this.closest('li').remove(); showToast('Item removed', 'error')">Remove</button>
+    `;
     
     list.appendChild(li);
     showToast(`Menu item '${input.value}' added.`);
     input.value = "";
   }
 
-  /* ORDER MANAGEMENT */
+  /* --- ORDER MANAGEMENT --- */
   function addOrder() {
     stats.orders++;
-    document.getElementById("orderCount").innerText = stats.orders;
+    updateDashboardStats();
     
     const list = document.getElementById("orderList");
     const li = document.createElement("li");
     
-    // Randomly generate a customer name for simulation
-    const names = ["Alice", "Bob", "Charlie", "David", "Eva"];
+    const names = ["Alice", "Bob", "Charlie", "David", "Eva", "Frank", "Grace"];
     const randomName = names[Math.floor(Math.random() * names.length)];
+    const randomPrice = Math.floor(Math.random() * 2000) + 500;
     
     li.innerHTML = `
-      <span>Order #${stats.orders} (${randomName})</span>
-      <span style="font-size:12px; background:#fef3c7; color:#b45309; padding:2px 6px; border-radius:4px;">Pending</span>
+      <div>
+        <div style="font-weight:600;">Order #${stats.orders} - ${randomName}</div>
+        <div style="font-size:0.85rem; color:#64748b;">Amount: ৳${randomPrice}</div>
+      </div>
+      <span style="font-size:12px; background:#fef3c7; color:#b45309; padding:4px 8px; border-radius:4px; font-weight:bold;">Pending</span>
     `;
     
-    // Add to top of list
     list.insertBefore(li, list.firstChild);
     showToast("New order received!");
   }
 
-  /* FINANCE */
+  /* --- FINANCIAL --- */
   function addRevenue() {
     const amount = 500;
     stats.revenue += amount;
+    updateDashboardStats();
     
-    // Update both revenue displays
-    document.getElementById("revenue").innerText = stats.revenue;
-    document.getElementById("financeTotal").innerText = stats.revenue;
+    const financeTotal = document.getElementById("financeTotal");
     
+    // Animation for number change
+    let start = parseInt(financeTotal.innerText);
+    let end = stats.revenue;
+    let duration = 500;
+    let startTime = null;
+
+    function animate(currentTime) {
+        if (!startTime) startTime = currentTime;
+        let progress = currentTime - startTime;
+        let value = Math.floor(progress / duration * (end - start) + start);
+        
+        financeTotal.innerText = value;
+        
+        if (progress < duration) {
+            requestAnimationFrame(animate);
+        } else {
+            financeTotal.innerText = end;
+        }
+    }
+    requestAnimationFrame(animate);
+
     showToast(`Revenue updated: +৳${amount}`);
   }
 
-  /* NOTIFICATIONS */
+  /* --- NOTIFICATIONS --- */
   function sendNotification() {
     const input = document.getElementById("notifyText");
     if (!input.value.trim()) {
@@ -704,27 +475,22 @@
     li.innerHTML = `
       <div>
         <div style="font-weight:600; font-size:14px;">${input.value}</div>
-        <div style="font-size:11px; color:#94a3b8;">${time}</div>
+        <div style="font-size:11px; color:#94a3b8;">Sent at ${time}</div>
       </div>
+      <span style="color:#10b981; font-size:0.8rem;">Sent</span>
     `;
     
     list.insertBefore(li, list.firstChild);
-    showToast("Notification sent to users");
+    showToast("Notification sent to all users");
     input.value = "";
   }
-  
-  // Close sidebar when clicking outside on mobile
-  document.addEventListener('click', function(event) {
-    const sidebar = document.getElementById('sidebar');
-    const toggleBtn = document.querySelector('.toggle-btn');
-    
-    // If screen is mobile (sidebar is overlay)
-    if (window.innerWidth <= 992) {
-      if (!sidebar.contains(event.target) && !toggleBtn.contains(event.target) && sidebar.classList.contains('show')) {
-        sidebar.classList.remove('show');
-      }
-    }
-  });
+
+  /* --- SHARED HELPERS --- */
+  function updateDashboardStats() {
+    document.getElementById("dash-userCount").innerText = stats.users;
+    document.getElementById("dash-orderCount").innerText = stats.orders;
+    document.getElementById("dash-revenue").innerText = stats.revenue;
+  }
 
 </script>
 </body>

@@ -28,7 +28,9 @@ if (mysqli_num_rows($check) > 0) {
     exit();
 }
 
-$sql = "INSERT INTO users (email, phone, password) VALUES ('$email', '$phone', '$password')";
+$name = $data['name'];
+$sql = "INSERT INTO users (name, email, phone, password) 
+        VALUES ('$name', '$email', '$phone', '$password')";
 
 if (mysqli_query($con, $sql)) {
     echo "success";

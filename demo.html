@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Home Made Food Delivery</title>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  body {
+    background: #f8fafc;
+    color: #1f2937;
+  }
+
+  /* NAVBAR */
+  header {
+    background: #16a34a;
+    padding: 15px 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  header h1 {
+    font-size: 20px;
+  }
+
+  nav a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  /* HERO */
+  .hero {
+    background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836') center/cover;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+  }
+
+  .hero h2 {
+    position: relative;
+    font-size: 28px;
+  }
+
+  /* SEARCH */
+  .search-box {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .search-box input {
+    width: 60%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+
+  /* FOOD GRID */
+  .container {
+    padding: 20px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+
+  .price {
+    color: #16a34a;
+    font-weight: bold;
+    margin: 5px 0;
+  }
+
+  .btn {
+    display: inline-block;
+    background: #16a34a;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+  }
+
+  @media(max-width:768px){
+    .search-box input {
+      width: 90%;
+    }
+  }
+</style>
+
+</head>
+
+<body>
+
+<header>
+  <h1>🍲 HomeMade Food</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Menu</a>
+    <a href="#">Orders</a>
+    <a href="#">Login</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <h2>Delicious Homemade Food Delivered To Your Door</h2>
+</div>
+
+<!-- SEARCH -->
+<div class="search-box">
+  <input type="text" placeholder="Search food...">
+</div>
+
+<!-- FOOD LIST -->
+<div class="container">
+  <h2 style="margin-bottom:15px;">Popular Foods</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+      <div class="card-body">
+        <h3>Chicken Burger</h3>
+        <p class="price">৳150</p>
+        <button class="btn">Order Now</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
+      <div class="card-body">
+        <h3>Pizza</h3>
+        <p class="price">৳300</p>
+        <button class="btn">Order Now</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1">
+      <div class="card-body">
+        <h3>Biryani</h3>
+        <p class="price">৳180</p>
+        <button class="btn">Order Now</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19">
+      <div class="card-body">
+        <h3>Juice</h3>
+        <p class="price">৳80</p>
+        <button class="btn">Order Now</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 HomeMade Food Delivery | All Rights Reserved</p>
+</footer>
+
+</body>
+</html>

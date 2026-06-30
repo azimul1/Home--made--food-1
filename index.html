@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,514 +8,16 @@
     <title>HomeMade food | Authentic Food Delivery Platform</title>
     <meta name="description" content="A digital marketplace connecting customers with home chefs for fresh, homemade, and affordable meals.">
 
-<link href ="Admin.html" real = "admin.html"> 
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
-        /* --- CSS VARIABLES & RESET --- */
-        :root {
-            --primary-color: #FF6B6B; /* Appetizing Red/Orange */
-            --primary-dark: #EE5253;
-            --secondary-color: #4ECDC4; /* Fresh Teal */
-            --text-dark: #2D3436;
-            --text-light: #636E72;
-            --bg-light: #F7F9FC;
-            --white: #FFFFFF;
-            --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
-            --shadow-md: 0 10px 15px rgba(0,0,0,0.1);
-            --radius: 12px;
-            --container-width: 1200px;
-            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-main);
-            color: var(--text-dark);
-            line-height: 1.6;
-            background-color: var(--white);
-            scroll-behavior: smooth;
-        }
-
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        ul { list-style: none; }
-        img { max-width: 100%; display: block; object-fit: cover; }
-
-        /* --- LAYOUT UTILITIES --- */
-        .container {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        section {
-            padding: 80px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-        }
-
-        .section-header p {
-            color: var(--text-light);
-            font-size: 1.1rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-outline {
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            background: transparent;
-        }
-
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-
-        /* --- HEADER & NAV --- */
-        header {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            font-weight: 500;
-            color: var(--text-dark);
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .mobile-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            padding-top: 140px;
-            padding-bottom: 100px;
-            background: linear-gradient(135deg, #FFF5F5 0%, #FFFFFF 100%);
-            display: flex;
-            align-items: center;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .hero-text h1 {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            color: var(--text-dark);
-        }
-
-        .hero-text span {
-            color: var(--primary-color);
-        }
-
-        .hero-text p {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 30px;
-        }
-
-        .hero-image {
-            position: relative;
-        }
-
-        .hero-image img {
-            border-radius: 20px;
-            box-shadow: var(--shadow-md);
-        }
-
-        /* --- PROBLEM & PURPOSE --- */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .about-card {
-            background: var(--white);
-            padding: 40px;
-            border-radius: var(--radius);
-            border-left: 5px solid var(--primary-color);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .about-card h3 {
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        .about-list li {
-            margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .about-list li::before {
-            content: "•";
-            color: var(--primary-color);
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-
-        /* --- SERVICES SECTION --- */
-        .bg-light {
-            background-color: var(--bg-light);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
-            transition: 0.3s;
-            text-align: center;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            display: inline-block;
-            background: #FFF0F0;
-            padding: 15px;
-            border-radius: 50%;
-        }
-
-        .service-card h3 {
-            margin-bottom: 10px;
-            color: var(--text-dark);
-        }
-
-        .service-card p {
-            font-size: 0.95rem;
-            color: var(--text-light);
-        }
-
-        /* --- KEY FEATURES (TABS) --- */
-        .tabs-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .tabs-header {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            padding: 12px 25px;
-            border: 1px solid #ddd;
-            background: var(--white);
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--text-light);
-            transition: all 0.3s;
-        }
-
-        .tab-btn.active {
-            background: var(--primary-color);
-            color: var(--white);
-            border-color: var(--primary-color);
-            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
-        }
-
-        .tab-content {
-            display: none;
-            background: var(--white);
-            padding: 40px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-md);
-            animation: fadeIn 0.5s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .feature-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .feature-item span {
-            color: var(--secondary-color);
-            font-size: 1.2rem;
-        }
-
-        /* --- BENEFITS SECTION --- */
-        .benefits-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-        }
-
-        .benefit-box {
-            flex: 1 1 300px;
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-        }
-
-        .benefit-icon {
-            background: var(--primary-color);
-            color: var(--white);
-            min-width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            font-size: 1.5rem;
-        }
-
-        /* --- TARGET AUDIENCE --- */
-        .audience-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .audience-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid #eee;
-        }
-
-        .audience-img {
-            height: 200px;
-            width: 100%;
-            object-fit: cover;
-        }
-
-        .audience-body {
-            padding: 25px;
-        }
-
-        .audience-body h3 {
-            color: var(--text-dark);
-            margin-bottom: 10px;
-        }
-
-        .audience-body ul {
-            list-style: disc;
-            padding-left: 20px;
-            color: var(--text-light);
-        }
-
-        /* --- TECHNICAL REQUIREMENTS --- */
-        .tech-section {
-            background: #2D3436;
-            color: var(--white);
-        }
-
-        .tech-section .section-header h2 {
-            color: var(--white);
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .tech-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: var(--radius);
-            backdrop-filter: blur(5px);
-        }
-
-        .tech-card h4 {
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-        }
-
-        .tech-list li {
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background: #222;
-            color: #ccc;
-            padding: 60px 0 20px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-col h5 {
-            color: var(--white);
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-col ul li a:hover {
-            color: var(--primary-color);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-            font-size: 0.9rem;
-        }
-
-        /* --- ANIMATIONS --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: var(--white);
-                padding: 20px;
-                box-shadow: var(--shadow-md);
-                text-align: center;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-toggle {
-                display: block;
-            }
-        }
-    </style>
+     <link rel="stylesheet" href="index.css">
+  
+ 
 </head>
+
 <body>
 
     <!-- Header -->
@@ -523,29 +26,34 @@
             <div class="logo">
                 🍲 HomeMade Food 
             </div>
+
             <div class="mobile-toggle" onclick="toggleMenu()">☰</div>
             <nav class="nav-links" id="navLinks">
                 <a href="#about">About</a>
                 <a href="#services">Services</a>
-            <!----
-                <a href="#features">Features</a>
-            -->
+                <a href="#popular-dishes">Popular</a>
+                <a href="#menu-section">Menu</a>
                 <a href="#audience">Target Audience</a>
                 <a href="login.html">Login</a>
-                <a href="Admin.html">Admin</a>
-               <a href="Menu.html">view menu</a> 
-                <a href="#contact" class="btn btn-primary" style="padding: 8px 20px; color: rgb(107, 62, 62);">Get Started</a>
-              
-                
+
+                <!-- <a href="Admin.html">Admin</a> -->
+                <a href="#contact" class="btn btn-primary" style="padding: 8px 20px; color: white;">Get Started</a>
             </nav>
-        
+
+            <!-- Cart Box -->
+            <div id="cart-box">
+                <h3>🛒 Cart</h3>
+                <ul id="cart-items"></ul>
+                <p id="cart-total">Total: ৳0</p>
+                <button onclick="checkout()">Proceed to Order</button>
+            </div>
         </div>
+    
     </header>
-
-
 
     <!-- Main Content -->
     <main>
+        
         <!-- Hero Section -->
         <section class="hero" id="home">
             <div class="container hero-content">
@@ -558,13 +66,67 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="data:image/jpeg;base64,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
-                    " alt="Delicious Homemade Food">
+                    <img src="https://img.freepik.com/free-photo/top-view-table-full-food_23-2149209253.jpg ">
                 </div>
             </div>
         </section>
 
-        <!-- About & Problem Section -->
+        <!-- Popular Dishes Section -->
+        <section id="popular-dishes">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Popular Dishes</h2>
+                    <p>Most ordered dishes by our food lovers</p>
+                </div>
+
+                <div class="dishes-grid" id="popular-grid"></div>
+            </div>
+        </section>
+
+        <!-- Full Interactive Menu Section -->
+        <section id="menu-section" class="bg-light">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Our Menu</h2>
+                    <p>Browse our selection of freshly prepared dishes</p>
+                </div>
+
+                <!-- Controls -->
+                <div class="menu-controls">
+                    <!-- Search -->
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-input" placeholder="Search dishes...">
+                    </div>
+
+                    <!-- Category Tabs -->
+                    <div class="filter-tabs">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="fast-food">Fast Food</button>
+                        <button class="filter-btn" data-filter="traditional">Traditional</button>
+                        <button class="filter-btn" data-filter="desserts">Desserts</button>
+                    </div>
+
+                    <!-- Available Only Toggle -->
+                    <div class="toggle-container">
+                        <span>Available Only</span>
+                        <label class="switch">
+                            <input type="checkbox" id="available-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Menu Grid -->
+                <div class="menu-grid" id="menu-grid">
+
+                    
+
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Problem Section (Our Purpose) -->
         <section id="about">
             <div class="container">
                 <div class="section-header">
@@ -581,7 +143,7 @@
                             <li>Small food businesses struggle with visibility.</li>
                         </ul>
                     </div>
-                    <div class="about-card" style="background-color: var(--primary-color); color: white; border-left: none;">
+                    <div class="about-card solution-card">
                         <h3>Our Solution</h3>
                         <p style="margin-bottom: 15px; color: rgba(255,255,255,0.9);">A digital marketplace offering healthy, authentic, and cost-effective food choices while creating income opportunities.</p>
                         <ul class="about-list">
@@ -645,893 +207,8 @@
                 </div>
             </div>
         </section>
-<!----
-        <!-Key Features (Tabs) --
-        <section id="features">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Platform Features</h2>
-                    <p>A comprehensive ecosystem for Customers,  And  Chefs.</p>
-                </div>
 
-                <div class="tabs-container">
-                    <div class="tabs-header">
-                        <button class="tab-btn active" onclick="openTab(event, 'customer')">For Customers</button>
-                        <button class="tab-btn" onclick="openTab(event, 'chef')">For Chefs</button>
-                       <!--- 
-                        <button class="tab-btn" onclick="openTab(event, 'admin')">Admin Panel</button>
-                    --
-                    </div>
-                -->
-
-
-
-<!---
-                    <!- Customer Tab --
-                    <div id="customer" class="tab-content active">
-                        <h3 style="margin-bottom: 20px; text-align: center;">Customer Experience</h3>
-                        <div class="feature-list">
-                            <div class="feature-item"><span>👤</span> User Registration/Login</div>
-                            <div class="feature-item"><span>🍽️</span> Menu Browsing (with Pictures)</div>
-                            <div class="feature-item"><span>📍</span> Real-Time Order Tracking</div>
-                            <div class="feature-item"><span>💳</span> Multiple Payment Options</div>
-                            <div class="feature-item"><span>⭐</span> Reviews & Rating System</div>
-                            <div class="feature-item"><span>🎁</span> Discounts & Loyalty Programs</div>
-                            <title>Food Ordering App</title>
-
-                        -->
-
-<style>
-/* =====================
-   GLOBAL STYLES
-===================== */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
-}
-
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
-}
-
-h2 {
-  margin-bottom: 10px;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  padding: 10px 16px;
-  background: #ff6b00;
-  color: #fff;
-  border-radius: 6px;
-}
-
-button:hover {
-  background: #e65c00;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 10px;
-  margin-top: 6px;
-  margin-bottom: 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-/* =====================
-   AUTH SECTION
-===================== */
-.auth-box {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 30px;
-}
-
-/* =====================
-   MENU SECTION
-===================== */
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-}
-
-.menu-item {
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.menu-item img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-}
-
-.menu-item .content {
-  padding: 15px;
-}
-
-/* =====================
-   ORDER TRACKING
-===================== */
-.tracking {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.status {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-}
-
-.step {
-  text-align: center;
-  flex: 1;
-}
-
-.step.active {
-  color: green;
-  font-weight: bold;
-}
-
-/* =====================
-   PAYMENT
-===================== */
-.payment {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-/* =====================
-   REVIEWS
-===================== */
-.review-box {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.stars span {
-  font-size: 22px;
-  cursor: pointer;
-  color: #ccc;
-}
-
-.stars span.active {
-  color: gold;
-}
-
-/* =====================
-   PROMO
-===================== */
-.promo {
-  background: linear-gradient(135deg, #ff6b00, #ff9b50);
-  color: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-}
-
-/* =====================
-   RESPONSIVE
-===================== */
-@media (max-width: 600px) {
-  h2 {
-    font-size: 20px;
-  }
-}
-</style>
-</head>
-
-<body>
-
-
-
-<!----
-<div class="container ">
-
-  <!- ================= AUTH ================= --
-  <div class="auth-box">
-    <h2>User Login / Registration</h2>
-    <input type="text" placeholder="Email">
-    <input type="int" placeholder="Phone Number">
-    <input type="password" placeholder="Password">
-    <button>Login</button>
-  </div>
--->
-  <!-- ================= MENU ================= --
-  <h2>Menu</h2>
-  <div class="menu-grid">
-    <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="">
-      <div class="content">
-        <h3>Burger</h3>
-        <p>Delicious beef burger</p>
-        <button>Add to Cart</button>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe" alt="">
-      <div class="content">
-        <h3>Pizza</h3>
-        <p>Cheesy pepperoni pizza</p>
-        <button>Add to Cart</button>
-      </div>
-    </div>
-
-    <div class="menu-item">
-      <img src=" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2i44aRqGG0iDm8PIp5-PD3eXR_5iAhcjWCg&s" alt="">
-      <div class="content">
-        <h3>kacchi</h3>
-        <p > mutton Kacchi</p>
-        <button>Add to Cart</button>
-      </div>
-    </div>
-
- <div class="menu-item">
-      <img src=" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReSt9qah2rpwrTUuLLGotFUv89T1dQGsKOOA&s" alt="">
-      <div class="content">
-        <h3>Goru</h3>
-        <p>Bhuna Goru</p>
-        <button>Add to Cart</button>
-      </div>
-    </div>
-
-
- <div class="menu-item">
-      <img src="https://i.ytimg.com/vi/AfpJFr0kbmk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLArjD0GQE__VIUnipRm8LbkSPP62g " alt="">
-      <div class="content">
-        <h3>Murgi</h3>
-        <p>Bhuna Murgi mangsho</p>
-        <button>Add to Cart</button>
-      </div>
-    </div>
-
-<div class="menu-item">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNLvRoMD-ztoTL3BQoHX2ZX72mL8wbXQ40-Q&s " alt="">
-      <div class="content">
-        <h3>khichuri</h3>
-        <p>Bhuna Khichuri</p>
-        <button>Add to Cart</button>
-      </div>
-    </div>
-
-
-
-    <div class="menu-item">
-      <img src="https://kitchenofdebjani.com/wp-content/uploads/2022/08/Gurer-Narkel-Naru-Recipe-Debjanir-Rannaghar.jpg" alt="">
-      <div class="content">
-        <h3>Naru</h3>
-        <p>Narkel Naru</p>
-        <button>Add to Cart</button>
-      </div>
-    </div>
-
-<div class="menu-item">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmkzKkCZXeHBhtKdb8XZM-n9in9ZZrQ_8gMg&s" alt="">
-      <div class="content">
-        <h3>Naru</h3>
-        <p>Tiler Naru</p>
-        <button>Add to Cart</button>
-      </div>
-    </div>
-
-<div class="menu-item">
-      <img src=" https://img.drz.lazcdn.com/g/kf/S3e11ba4caddd41bd92834c4d2b1beb20P.jpg_200x200q80.avif" alt="">
-      <div class="content">
-        <h3>papur</h3>
-        <p>melar papur</p>
-        <button>Add to Cart</button>
-      </div>
-    </div>
-
-<div class="menu-item">
-      <img src=" https://thebellyrulesthemind.net/wp-content/uploads/2022/10/Instant-Pot-Ghee-04-pin.jpg " alt="">
-      <div class="content">
-        <h3>Ghee</h3>
-        <p>Pure Ghee</p>
-        <button>Add to Cart</button>
-      </div>
-    </div>
-
-<div class="menu-item">
-      <img src=" https://img.drz.lazcdn.com/static/bd/p/e6dc9b24c93d8e246a691e97151ac631.jpg_720x720q80.jpg " alt="">
-      <div class="content">
-        <h3>Modhu</h3>
-        <p>Natural Modhu</p>
-        <button>Add to Cart</button>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ================= ORDER TRACKING ================= --
-  <h2 style="margin-top:30px;">Order Tracking</h2>
-  <div class="tracking">
-    <button onclick="nextStep()">Update Status</button>
-    <div class="status">
-      <div class="step active">Placed</div>
-      <div class="step">Cooking</div>
-      <div class="step">On the Way</div>
-      <div class="step">Delivered</div>
-    </div>
-  </div>
-
-  <!-- ================= PAYMENT ================= --
-  <h2 style="margin-top:30px;">Payment Options</h2>
-  <div class="payment">
-    <select>
-      <option>Cash on Delivery</option>
-      <option>Online Payment</option>
-    </select>
-    <button>Pay Now</button>
-  </div>
-
-  <!-- ================= REVIEWS ================= --
-  <h2 style="margin-top:30px;">Review & Rating</h2>
-  <div class="review-box">
-    <div class="stars" id="stars">
-      <span onclick="rate(1)">★</span>
-      <span onclick="rate(2)">★</span>
-      <span onclick="rate(3)">★</span>
-      <span onclick="rate(4)">★</span>
-      <span onclick="rate(5)">★</span>
-    </div>
-    <textarea placeholder="Write your review"></textarea>
-    <button>Submit Review</button>
-  </div>
-
-  <!-- ================= PROMO ================= --
-  <h2 style="margin-top:30px;">Promotions</h2>
-  <div class="promo">
-    <h3>🎉 20% OFF for Loyal Customers!</h3>
-    <p>Use code: LOYAL20</p>
-  </div>
--->
-</div>
-
-
-<script>
-/* =====================
-   ORDER TRACKING JS
-===================== */
-let currentStep = 0;
-function nextStep() {
-  const steps = document.querySelectorAll('.step');
-  if (currentStep < steps.length - 1) {
-    currentStep++;
-    steps[currentStep].classList.add('active');
-  }
-}
-
-/* =====================
-   RATING JS
-===================== */
-function rate(value) {
-  const stars = document.querySelectorAll('#stars span');
-  stars.forEach((star, index) => {
-    star.classList.toggle('active', index < value);
-  });
-}
-</script>
-
-
-                        </div>
-                    </div>
-<!---
-                    <!- Chef Tab ---
-                    <div id="chef" class="tab-content">
-                        <h3 style="margin-bottom: 20px; text-align: center;">Chef Dashboard</h3>
-                        <div class="feature-list">
-                            <div class="feature-item"><span>📝</span> Chef Registration/Login</div>
-                            <div class="feature-item"><span>📤</span> Menu Upload & Management</div>
-                            <div class="feature-item"><span>🔔</span> Order Management (Accept/Reject)</div>
-                            <div class="feature-item"><span>📈</span> Earnings Dashboard</div>
-                            <title>Chef Dashboard</title>
-
-                        -->            
-                        
-<style>
-
-   GLOBAL
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #9fbddb;
-}
-
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
-}
-
-h2 {
-  margin-bottom: 10px;
-}
-
-.card {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 25px;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-button {
-  background: #ff6b00;
-  color: #fff;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #e65c00;
-}
-
-/* =======================
-   MENU GRID
-======================= */
-.menu-list, .order-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 15px;
-}
-
-.menu-item, .order-item {
-  border: 1px solid #eee;
-  padding: 15px;
-  border-radius: 10px;
-}
-
-/* =======================
-   DASHBOARD
-======================= */
-.dashboard {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-}
-
-.stat {
-  background: linear-gradient(135deg, #ff6b00, #ff9b50);
-  color: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  font-size: 18px;
-}
-
-/* =======================
-   RESPONSIVE
-======================= */
-@media (max-width: 600px) {
-  h2 {
-    font-size: 20px;
-  }
-}
-</style>
-</head>
-
-<body>
-<!--
-<div class="container">
-
-  <!-================= LOGIN ================= --
-  <div class="card">
-    <h2>Chef Login / Registration</h2>
-    <input type="email" placeholder="Email">
-    <input type="int" placeholder="Phone Number">
-    <input type="password" placeholder="Password">
-    <button>Login</button>
-  </div>
-
-  <!- ================= MENU MANAGEMENT ================= --
-  <div class="card">
-    <h2>Menu Upload & Management</h2>
-
-    <input type="text" id="menuName" placeholder="Dish Name">
-    <input type="number" id="menuPrice" placeholder="Price">
-    <textarea id="menuDesc" placeholder="Description"></textarea>
-    <button onclick="addMenu()">Add Menu Item</button>
-
-    <div class="menu-list" id="menuList"></div>
-  </div>
-
-  <!- ================= ORDER MANAGEMENT ================= --
-  <div class="card">
-    <h2>Order Management</h2>
-
-    <div class="order-list" id="orderList">
-      <div class="order-item">
-        <h4>Order #101</h4>
-        <p>Burger x2</p>
-        <button onclick="completeOrder(250)">Complete Order</button>
-      </div>
-
-      <div class="order-item">
-        <h4>Order #102</h4>
-        <p>Pizza x1</p>
-        <button onclick="completeOrder(300)">Complete Order</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= EARNINGS ================= ---
-  <div class="card">
-    <h2>Earnings Dashboard</h2>
-    <div class="dashboard">
-      <div class="stat">
-        Total Orders<br><span id="totalOrders">0</span>
-      </div>
-      <div class="stat">
-        Total Earnings<br>৳<span id="totalEarnings">0</span>
-      </div>
-    </div>
-  </div>
-
-</div>
--->
-
-<script>
-/* ===================
-   MENU MANAGEMENT
-======================= */
-function addMenu() {
-  const name = document.getElementById("menuName").value;
-  const price = document.getElementById("menuPrice").value;
-  const desc = document.getElementById("menuDesc").value;
-
-  if (!name || !price) return alert("Please fill all fields");
-
-  const menuList = document.getElementById("menuList");
-
-  const item = document.createElement("div");
-  item.className = "menu-item";
-  item.innerHTML = `
-    <h4>${name}</h4>
-    <p>${desc}</p>
-    <strong>৳${price}</strong><br><br>
-    <button onclick="this.parentElement.remove()">Delete</button>
-  `;
-
-  menuList.appendChild(item);
-
-  document.getElementById("menuName").value = "";
-  document.getElementById("menuPrice").value = "";
-  document.getElementById("menuDesc").value = "";
-}
-
-/* =======================
-   ORDER & EARNINGS
-======================= */
-let order = 0;
-let earnings = 0;
-
-function completeOrder(amount) {
-  orders++;
-  earnings += amount;
-
-  document.getElementById("totalOrders").innerText = orders;
-  document.getElementById("totalEarnings").innerText = earnings;
-}
-</script>
-                        </div>
-                    </div>
-
-
-
-
-
-
-  <!-- Key Features (Tabs) --
-        <section id="">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Admin Features</h2>
-                    <p>Admin.</p>
-                </div>
-
-                <div class="tabs-container">
-                    <div class="tabs-header">
-                       
-                    
-                        <button class="tab-btn" onclick="openTab(event, 'admin')">Admin Panel</button>
-                    
-                    </div>
-
-                -->
-
-
-                    <!-- Admin Tab -
-                    <div id="admin" class="tab-content">
-                        <h3 style="margin-bottom: 20px; text-align: center;">Admin Control</h3>
-                        <div class="feature-list">
-                            <div class="feature-item"><span>🛡️</span> User & Chef Management</div>
-                            <div class="feature-item"><span>📦</span> Order & Delivery Monitoring</div>
-                            <div class="feature-item"><span>💰</span> Financial Management</div>
-                            <div class="feature-item"><span>📊</span> Reports & Analytics</div>
-                            <div class="feature-item"><span>🔒</span> Security & Access Control</div>
-<title>Admin Panel</title>
-
-<style>
-/* ======================
-   GLOBAL STYLES
-====================== */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f2f4f7;
-}
-
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
-}
-
-h2 {
-  margin-bottom: 10px;
-}
-
-.card {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 25px;
-}
-
-button {
-  background: #2563eb;
-  color: #fff;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #1d4ed8;
-}
-
-input, select {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-/* ======================
-   DASHBOARD
-====================== */
-.dashboard {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-}
-
-.stat {
-  background: linear-gradient(135deg, #2563eb, #60a5fa);
-  color: rgb(221, 132, 132);
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  font-size: 18px;
-}
-
-/* ======================
-   TABLE
-====================== */
-.table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.table th, .table td {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  text-align: left;
-}
-
-.table th {
-  background: #3c4e61;
-}
-
-/* ======================
-   RESPONSIVE
-====================== */
-@media (max-width: 600px) {
-  h2 {
-    font-size: 20px;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-  <!-- ================= DASHBOARD ================= --
-  <div class="card">
-    <h2>Admin Dashboard</h2>
-    <div class="dashboard">
-      <div class="stat">Users<br><span id="userCount">0</span></div>
-      <div class="stat">Orders<br><span id="orderCount">0</span></div>
-      <div class="stat">Revenue<br>৳<span id="revenue">0</span></div>
-      <div class="stat">Admins<br>1</div>
-    </div>
-  </div>
-
-  <!-- ================= USER MANAGEMENT ================= --
-  <div class="card">
-    <h2>User Management</h2>
-    <input id="userName" placeholder="User Name">
-    <select id="userRole">
-      <option>Customer</option>
-      <option>Chef</option>
-      <option>Admin</option>
-    </select>
-    <button onclick="addUser()">Add User</button>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Role</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="userTable"></tbody>
-    </table>
-  </div>
-
-  <!-- ================= MENU MANAGEMENT ================= --
-  <div class="card">
-    <h2>Menu & Content Management</h2>
-    <input id="menuItem" placeholder="Menu Item">
-    <button onclick="addMenu()">Add Menu</button>
-    <ul id="menuList"></ul>
-  </div>
-
-  <!-- ================= ORDER MANAGEMENT ================= --
-  <div class="card">
-    <h2>Order & Delivery Management</h2>
-    <button onclick="addOrder()">Create Order</button>
-    <ul id="orderList"></ul>
-  </div>
-
-  <!-- ================= FINANCIAL ================= --
-  <div class="card">
-    <h2>Financial Management</h2>
-    <button onclick="addRevenue()">Add Sample Revenue</button>
-    <p>Total Revenue: ৳<span id="financeTotal">0</span></p>
-  </div>
-
-  <!-- ================= REPORTS ================= --
-  <div class="card">
-    <h2>Reports & Analytics</h2>
-    <p>✔ Daily Orders Tracking</p>
-    <p>✔ Monthly Revenue Summary</p>
-    <p>✔ User Growth</p>
-  </div>
-
-  <!-- ================= SECURITY ================= --
-  <div class="card">
-    <h2>Security & Access Control</h2>
-    <p>Current Role: <strong>Admin</strong></p>
-    <p>✔ Role-based access enabled</p>
-  </div>
-
-  <!-- ================= NOTIFICATIONS ================= --
-  <div class="card">
-    <h2>Notifications & Communication</h2>
-    <input id="notifyText" placeholder="Send notification">
-    <button onclick="sendNotification()">Send</button>
-    <ul id="notifyList"></ul>
-  </div>
-
-</div>
-
-<script>
-/* ======================
-   USER MANAGEMENT
-====================== */
-let users = 0;
-function addUser() {
-  const name = userName.value;
-  const role = userRole.value;
-  if (!name) return;
-
-  const row = document.createElement("tr");
-  row.innerHTML = `
-    <td>${name}</td>
-    <td>${role}</td>
-    <td><button onclick="this.closest('tr').remove()">Remove</button></td>
-  `;
-  userTable.appendChild(row);
-  userCount.innerText = ++users;
-  userName.value = "";
-}
-
-/* ======================
-   MENU
-====================== */
-function addMenu() {
-  const li = document.createElement("li");
-  li.textContent = menuItem.value;
-  menuList.appendChild(li);
-  menuItem.value = "";
-}
-
-/* ======================
-   ORDERS
-====================== */
-let orders = 0;
-function addOrder() {
-  orders++;
-  orderCount.innerText = orders;
-  const li = document.createElement("li");
-  li.textContent = "Order #" + orders + " - Pending";
-  orderList.appendChild(li);
-}
-
-/* ======================
-   FINANCE
-====================== */
-let money = 0;
-function addRevenue() {
-  money += 500;
-  revenue.innerText = money;
-  financeTotal.innerText = money;
-}
-
-/* ======================
-   NOTIFICATIONS
-====================== */
-function sendNotification() {
-  const li = document.createElement("li");
-  li.textContent = notifyText.value;
-  notifyList.appendChild(li);
-  notifyText.value = "";
-}
-</script>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    -->
-
-
-
-
-
-        <!-- Benefits Section -->
+        <!-- Benefits Section (Why Choose Us) -->
         <section class="bg-light">
             <div class="container">
                 <div class="section-header">
@@ -1584,7 +261,7 @@ function sendNotification() {
             </div>
         </section>
 
-        <!-- Target Audience Section -->
+        <!-- Target Audience Section (Who Is This For) -->
         <section id="audience">
             <div class="container">
                 <div class="section-header">
@@ -1662,62 +339,21 @@ function sendNotification() {
             </div>
         </section>
 
-
-        <!-- Technical Section 
-        <section id="tech" class="tech-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Technical Requirements</h2>
-                    <p>Built on robust, scalable, and secure technology infrastructure.</p>
-                </div>
-                <div class="tech-grid">
-                    <div class="tech-card">
-                        <h4>Mobile Application</h4>
-                        <ul class="tech-list">
-                            <li>Platforms: Android & iOS</li>
-                            <li>Frameworks: Flutter or React Native</li>
-                            <li>Features: GPS Tracking, Push Notifications</li>
-                        </ul>
-                    </div>
-                    <div class="tech-card">
-                        <h4>Web Application</h4>
-                        <ul class="tech-list">
-                            <li>Frontend: React.js, Angular, or Vue.js</li>
-                            <li>Backend: Node.js or Django</li>
-                            <li>Access: Customer, Chef, & Admin Portals</li>
-                        </ul>
-                    </div>
-                    <div class="tech-card">
-                        <h4>Server & Hosting</h4>
-                        <ul class="tech-list">
-                            <li>Hosting: AWS, Firebase, or Google Cloud</li>
-                            <li>Security: HTTPS, SSL Encryption</li>
-                            <li>Database: PostgreSQL or MongoDB</li>
-                        </ul>
-                    </div>
-                    <div class="tech-card">
-                        <h4>Payments & Delivery</h4>
-                        <ul class="tech-list">
-                            <li>Gateway: Stripe, PayPal, or Local (bKash)</li>
-                            <li>Compliance: PCI-DSS</li>
-                            <li>Features: Route Optimization, Real-time Tracking</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-      -->
         <!-- CTA Section -->
-        <section style="text-align: center; background: #c4a5a5;">
+        <section class="cta-section">
             <div class="container">
-                <h2 style="margin-bottom: 20px; color: var(--text-dark);">Ready to Taste the Difference?</h2>
-                <p style="margin-bottom: 30px; color: var(--text-light);">Join us as a customer to eat healthy, or as a chef to start earning.</p>
-                <button class="btn btn-primary">Download App</button>
-                <button class="btn btn-outline" style="margin-left: 10px;">Partner With Us</button>
+                <h2>Ready to Taste the Difference?</h2>
+                <p>Join us as a customer to eat healthy, or as a chef to start earning.</p>
+                <button class="btn" style="background: white; color: var(--primary-color);">Download App</button>
+                <button class="btn btn-outline" style="border-color: white; color: white; margin-left: 10px;">Partner With Us</button>
             </div>
         </section>
 
     </main>
+
+
+
+
 
     <!-- Footer -->
     <footer id="contact">
@@ -1734,7 +370,6 @@ function sendNotification() {
                         <li><a href="#services">Services</a></li>
                         <li><a href="#features">Features</a></li>
                         <li><a href="#tech">Technology</a></li>
-                       
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -1750,7 +385,7 @@ function sendNotification() {
                     <h5>Contact</h5>
                     <ul>
                         <li>Email: support@homemadeconnect.com</li>
-                        <li>Phone: +880 234 567 8900</li>
+                        <li>Phone: +8801450-451278</li>
                         <li>Location: [Your City Name]</li>
                         <li>Location: [Your Country Name]</li>
                     </ul>
@@ -1762,7 +397,10 @@ function sendNotification() {
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- Toast Notification -->
+    <div id="toast">Item added to cart!</div>
+
+    <!-- Consolidated JavaScript -->
     <script>
         // Toggle Mobile Menu
         function toggleMenu() {
@@ -1770,30 +408,111 @@ function sendNotification() {
             navLinks.classList.toggle('active');
         }
 
-        // Tab System for Features Section
-        function openTab(evt, tabName) {
-            // Get all elements with class="tab-content" and hide them
-            const tabContent = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < tabContent.length; i++) {
-                tabContent[i].style.display = "none";
-                tabContent[i].classList.remove("active");
+        // Add to Cart Function (Unified)
+        let cart = [];
+
+        function addToCart(name, price) {
+            // check if item already exists
+            let existing = cart.find(item => item.name === name);
+
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ name: name, price: price, qty: 1 });
             }
 
-            // Get all elements with class="tab-btn" and remove the class "active"
-            const tabLinks = document.getElementsByClassName("tab-btn");
-            for (let i = 0; i < tabLinks.length; i++) {
-                tabLinks[i].className = tabLinks[i].className.replace(" active", "");
-            }
+            console.log(cart);
 
-            // Show the current tab, and add an "active" class to the button that opened the tab
-            document.getElementById(tabName).style.display = "block";
-            // Small timeout to allow display:block to apply before opacity transition (if added via CSS)
+            // Toast message
+            const toast = document.getElementById("toast");
+            toast.textContent = name + " added to cart";
+            toast.className = "show";
+
             setTimeout(() => {
-                document.getElementById(tabName).classList.add("active");
-            }, 10);
-            
-            evt.currentTarget.className += " active";
+                toast.className = toast.className.replace("show", "");
+            }, 2000);
+            updateCartUI();
         }
+        function updateCartUI() {
+            const list = document.getElementById("cart-items");
+            const totalText = document.getElementById("cart-total");
+
+            list.innerHTML = "";
+            let total = 0;
+
+            cart.forEach(item => {
+                total += item.price * item.qty;
+
+                list.innerHTML += `
+                    <li>
+                        ${item.name} x ${item.qty} = ৳${item.price * item.qty}
+                    </li>
+                `;
+            });
+
+            totalText.textContent = "Total: ৳" + total;
+        }
+        function checkout() {
+                if (cart.length === 0) {
+                    alert("Cart is empty!");
+                    return;
+                }
+
+                localStorage.setItem("cart", JSON.stringify(cart));
+                window.location.href = "checkout.html";
+            }
+        // --- Menu Filtering Logic ---
+        const searchInput = document.getElementById('search-input');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const availableToggle = document.getElementById('available-toggle');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        function filterMenu() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeCategory = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+            const showAvailableOnly = availableToggle.checked;
+
+            menuItems.forEach(item => {
+                // Get data attributes
+                const itemName = item.getAttribute('data-name').toLowerCase();
+                const itemCategory = item.getAttribute('data-category');
+                const isAvailable = item.getAttribute('data-available') === 'true';
+
+                // Check Conditions
+                const matchesSearch = itemName.includes(searchTerm);
+                const matchesCategory = activeCategory === 'all' || itemCategory === activeCategory;
+                const matchesAvailability = showAvailableOnly ? isAvailable : true;
+
+                // Show/Hide logic
+                if (matchesSearch && matchesCategory && matchesAvailability) {
+                    item.classList.remove('hide');
+                    item.classList.add('show');
+                } else {
+                    item.classList.remove('show');
+                    item.classList.add('hide');
+                }
+            });
+        }
+
+        // Event Listeners
+        
+        // 1. Search Input
+        searchInput.addEventListener('keyup', filterMenu);
+
+        // 2. Category Tabs
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active to clicked
+                btn.classList.add('active');
+                // Run filter
+                filterMenu();
+            });
+        });
+
+        // 3. Toggle Switch
+        availableToggle.addEventListener('change', filterMenu);
 
         // Close mobile menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
@@ -1804,9 +523,86 @@ function sendNotification() {
                 }
             });
         });
+    
+    function loadMenu() {
+    fetch("get_food.php")
+    .then(res => res.json())
+    .then(data => {
+        const grid = document.getElementById("menu-grid");
+        grid.innerHTML = "";
+
+        data.forEach(food => {
+
+            let available = food.is_available == 1;
+
+            let badge = available 
+                ? `<span class="badge">${food.category}</span>`
+                : `<span class="badge unavailable">UNAVAILABLE</span>`;
+
+            let button = available 
+                ? `<button class="add-btn" onclick="addToCart('${food.name}', '${food.price}')">+ Add</button>`
+                : `<button class="add-btn">Sold Out</button>`;
+
+            grid.innerHTML += `
+                <article class="menu-item show"
+                    data-name="${food.name}"
+                    data-category="${food.category.toLowerCase()}"
+                    data-available="${available}">
+                    
+                    <div class="item-img">
+                        <img src="${food.image}">
+                        ${badge}
+                    </div>
+
+                    <div class="item-content">
+                        <div class="item-header">
+                            <h3 class="item-title">${food.name}</h3>
+                            <span class="item-price">৳${food.price}</span>
+                        </div>
+
+                        ${button}
+                    </div>
+                </article>
+            `;
+        });
+    });
+}
+
+function loadPopular() {
+    fetch("get_food.php")
+    .then(res => res.json())
+    .then(data => {
+        const grid = document.getElementById("popular-grid");
+        grid.innerHTML = "";
+
+        const popularItems = data.filter(food => food.is_popular == 1);
+
+        popularItems.slice(0, 6).forEach(food => {
+            grid.innerHTML += `
+                <article class="dish-card">
+                    <div class="card-image">
+                        <img src="${food.image}">
+                    </div>
+
+                    <div class="card-content">
+                        <h3 class="dish-name">
+                            ${food.name}
+                            <span class="price-text">৳${food.price}</span>
+                        </h3>
+
+                        <button class="add-btn" onclick="addToCart('${food.name}', '${food.price}')">+ Add</button>
+                    </div>
+                </article>
+            `;
+        });
+    });
+}
+
+window.onload = function() {
+    loadMenu();
+     loadPopular();
+};
+    
     </script>
-  -
-     
 </body>
 </html>
-

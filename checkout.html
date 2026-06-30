@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout</title>
+
+<style>
+body {
+    font-family: sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.checkout-container {
+    width: 100%;
+    max-width: 400px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #218838;
+}
+</style>
+</head>
+
+<body>
+
+<div class="checkout-container">
+
+<h2>Checkout</h2>
+
+<label>Name</label>
+<input type="text" id="name">
+
+<label>Phone</label>
+<input type="text" id="phone">
+
+<label>Address</label>
+<textarea id="address"></textarea>
+
+<!-- PAYMENT METHOD -->
+<label>Payment Method</label>
+<select id="paymentMethod" onchange="togglePayment()">
+    <option value="COD">Cash on Delivery</option>
+    <option value="PAYNOW">Pay Now</option>
+</select>
+
+<!-- DUMMY PAYMENT BOX -->
+<div id="paymentBox" style="display:none; border:1px solid #ddd; padding:10px; margin-top:10px;">
+    <h3>Dummy Payment</h3>
+
+    <input type="text" id="cardNumber" placeholder="Card Number">
+    <input type="text" id="cardName" placeholder="Card Holder Name">
+    <input type="text" id="cardExpiry" placeholder="MM/YY">
+    <input type="text" id="cardCVC" placeholder="CVC">
+
+    <button type="button" onclick="payNow()" style="background:#007bff;">
+        Pay ৳<span id="payAmount">0</span>
+    </button>
+</div>
+
+<!-- CART -->
+<ul id="order-list"></ul>
+
+<h3 id="order-total">Total: ৳0</h3>
+
+<button onclick="placeOrder()">Place Order</button>
+
+</div>
+
+<script>
+
+// CART
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let list = document.getElementById("order-list");
+let totalElement = document.getElementById("order-total");
+let total = 0;
+
+// RENDER CART
+if (cart.length === 0) {
+    list.innerHTML = "<li style='justify-content:center;color:#999;'>Cart Empty</li>";
+} else {
+    cart.forEach(item => {
+        total += item.price * item.qty;
+
+        list.innerHTML += `
+            <li>
+                <span>${item.name} x ${item.qty}</span>
+                <span>৳${item.price * item.qty}</span>
+            </li>
+        `;
+    });
+}
+
+totalElement.innerText = "Total: ৳" + total;
+document.getElementById("payAmount").innerText = total;
+
+
+// PAYMENT TOGGLE
+function togglePayment() {
+    let method = document.getElementById("paymentMethod").value;
+    document.getElementById("paymentBox").style.display =
+        method === "PAYNOW" ? "block" : "none";
+}
+
+
+// PLACE ORDER
+function placeOrder() {
+
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let address = document.getElementById("address").value;
+    let method = document.getElementById("paymentMethod").value;
+
+    if (!name || !phone || !address) {
+        alert("Fill all fields");
+        return;
+    }
+
+    if (cart.length === 0) {
+        alert("Cart empty");
+        return;
+    }
+
+    if (method === "COD") {
+        submitOrder("COD");
+    } else {
+        alert("Complete payment first");
+    }
+}
+
+
+// DUMMY PAYMENT
+function payNow() {
+
+    let cardNumber = document.getElementById("cardNumber").value;
+    let cardName = document.getElementById("cardName").value;
+    let cardExpiry = document.getElementById("cardExpiry").value;
+    let cardCVC = document.getElementById("cardCVC").value;
+
+    if (!cardNumber || !cardName || !cardExpiry || !cardCVC) {
+        alert("Fill payment details");
+        return;
+    }
+
+    alert("Processing Payment...");
+
+    setTimeout(() => {
+        alert("Payment Successful ✅");
+        submitOrder("PAID");
+    }, 1500);
+}
+
+
+// SUBMIT ORDER
+function submitOrder(paymentStatus) {
+
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let address = document.getElementById("address").value;
+
+    fetch("place_order.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name,
+            phone,
+            address,
+            cart,
+            payment: paymentStatus
+        })
+    })
+    .then(res => res.text())
+    .then(data => {
+
+        alert("Order Placed (" + paymentStatus + ")");
+
+        localStorage.removeItem("cart");
+
+        window.location.href = "index.html";
+    });
+}
+
+</script>
+
+</body>
+</html>

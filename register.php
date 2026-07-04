@@ -20,7 +20,6 @@ $data = json_decode(file_get_contents("php://input"), true);
 $email = $data['email'];
 $phone = $data['phone'];
 $password = password_hash($data['password'], PASSWORD_DEFAULT);
-
 // Check if user exists
 $check = mysqli_query($con, "SELECT * FROM users WHERE email='$email'");
 if (mysqli_num_rows($check) > 0) {

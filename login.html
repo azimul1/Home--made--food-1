@@ -17,31 +17,31 @@
 
 <body>
 
-<header>
-  <div class="header-container">
+<div class="auth-box">
 
-    <div class="auth-box">
-      <h2 id="formTitle">User Login</h2>
+  <div class="app-name">HomeMade Food</div>
+  <div class="app-subtitle">Get your fresh, homemade meals delivered!</div>
 
-      <div class="error" id="errorMsg"></div>
+  <h2 id="formTitle">User Login</h2>
 
-      <input type="email" id="email" placeholder="Email">
-      <input type="tel" id="phone" placeholder="Phone Number" class="hidden">
-      <input type="password" id="password" placeholder="Password">
+  <div class="error" id="errorMsg"></div>
 
-      <div class="btn-group">
-        <button class="primary-btn" id="mainBtn">Login</button>
-        <button class="secondary-btn" id="resetBtn">Clear</button>
-      </div>
+  <input type="email" id="email" placeholder="Email">
+  <input type="tel" id="phone" placeholder="Phone Number" class="hidden">
+  <input type="password" id="password" placeholder="Password">
+  <input type="text" id="name" placeholder="Full Name" class="hidden">
 
-      <div class="auth-footer">
-        <span id="toggleText">Don’t have an account?</span>
-        <a id="toggleLink">Register</a>
-      </div>
-    </div>
-
+  <div class="btn-group">
+    <button class="primary-btn" id="mainBtn">Login</button>
+    <button class="secondary-btn" id="resetBtn">Clear</button>
   </div>
-</header>
+
+  <div class="auth-footer">
+    <span id="toggleText">Don't have an account?</span>
+    <a id="toggleLink">Register</a>
+  </div>
+
+</div>
 
 <script>
 let isLogin = true;
@@ -53,6 +53,7 @@ const toggleText = document.getElementById("toggleText");
 const errorMsg = document.getElementById("errorMsg");
 
 const email = document.getElementById("email");
+const name = document.getElementById("name");
 const phone = document.getElementById("phone");
 const password = document.getElementById("password");
 const resetBtn = document.getElementById("resetBtn");
@@ -63,9 +64,9 @@ toggleLink.addEventListener("click", () => {
 
   formTitle.innerText = isLogin ? "User Login" : "User Registration";
   mainBtn.innerText = isLogin ? "Login" : "Register";
-  toggleText.innerText = isLogin ? "Don’t have an account?" : "Already have an account?";
+  toggleText.innerText = isLogin ? "Don't have an account?" : "Already have an account?";
   toggleLink.innerText = isLogin ? "Register" : "Login";
-
+  name.classList.toggle("hidden", isLogin);
   phone.classList.toggle("hidden", isLogin);
   errorMsg.innerText = "";
 });
@@ -94,6 +95,7 @@ mainBtn.addEventListener("click", async () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        name: name.value,
         email: email.value,
         phone: phone.value,
         password: password.value
@@ -126,6 +128,7 @@ mainBtn.addEventListener("click", async () => {
 
 // Reset
 resetBtn.addEventListener("click", () => {
+  name.value = "";
   email.value = "";
   phone.value = "";
   password.value = "";
